@@ -14,9 +14,3 @@ h2{
     border-radius: 5px;
     text-align: center;
 }
-.quotes{
-    display: flex;
-    overflow-x: auto ;
-    padding: 20px;
-    color: rgb(241, 18, 18);
-}

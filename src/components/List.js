@@ -1,26 +1,25 @@
 import React, {useState, useEffect} from 'react';
 import { useHistory } from 'react-router-dom';
+
 import PropTypes from 'prop-types';
 import IconButton from '@material-ui/core/IconButton';
 import TextField from '@material-ui/core/TextField';
-import {
-  DataGrid,
-  GridToolbarFilterButton,
-} from '@material-ui/data-grid';
 import ClearIcon from '@material-ui/icons/Clear';
 import SearchIcon from '@material-ui/icons/Search';
+
+import { DataGrid, GridToolbarFilterButton } from '@material-ui/data-grid';
 import { createTheme } from '@material-ui/core/styles';
 import { makeStyles } from '@material-ui/styles';
+
 import axios from "../axios"
-import "./List.css"
 
 
-function escapeRegExp(value) {
-  return value.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&');
+const escapeRegExp = (value) => {
+  return value.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&')
 }
 
-
 const defaultTheme = createTheme();
+
 const useStyles = makeStyles(
   (theme) => ({
     root: {
@@ -47,7 +46,7 @@ const useStyles = makeStyles(
         color: "white",
         cursor:"pointer"
           },
-       "& .MuiSelect-select.MuiSelect-select": {
+      "& .MuiSelect-select.MuiSelect-select": {
             color: "white"
         },
       "& .MuiIconButton-colorInherit": {
@@ -61,9 +60,11 @@ const useStyles = makeStyles(
     } 
   }),
   { defaultTheme },
-);
+)
 
-function QuickSearchToolbar(props) {
+
+const QuickSearchToolbar = (props) => {
+
   const classes = useStyles();
 
   return (
@@ -95,28 +96,29 @@ function QuickSearchToolbar(props) {
         }}
       />
     </div>
-  );
+  )
 }
 
 QuickSearchToolbar.propTypes = {
   clearSearch: PropTypes.func.isRequired,
   onChange: PropTypes.func.isRequired,
   value: PropTypes.string.isRequired,
-};
+}
 
 
 const columns = [
-  { field: 'char_id',
+  { 
+    field: 'char_id',
     headerName: 'ID',
-     width: 100,
-     sortable: true
+    width: 100,
+    sortable: true
    },
-  { field: 'name',
+  { 
+    field: 'name',
     headerName: 'NAME',
-     width: 150,
-     sortable: true
+    width: 150,
+    sortable: true
    },
- 
   {
     field: 'occupation',
     headerName: 'OCCUPATION',
@@ -139,44 +141,42 @@ const columns = [
 ];
 
 
-
-
 export default function List() {
 
-    const [characters, setCharacters] = useState([])
-    const classes = useStyles()
-    const history = useHistory()
+  const classes = useStyles()
+  const history = useHistory()
+
+  const [characters, setCharacters] = useState([])
+  const [searchText, setSearchText] = useState('')
     
   useEffect(() => {
     async function fetchData(){
         const request = await axios.get("/api/characters")
         setCharacters(request.data)
-        
         return request
     }
     fetchData()
   }, [])
 
-  
-  
-  const [searchText, setSearchText] = React.useState('')
-  const [rows, setRows] = React.useState(characters)
+
+  const [rows, setRows] = useState([])
 
   const requestSearch = (searchValue) => {
-    setSearchText(searchValue);
-    const searchRegex = new RegExp(escapeRegExp(searchValue), 'i');
+    setSearchText(searchValue)
+    const searchRegex = new RegExp(escapeRegExp(searchValue), 'i')
     const filteredRows = rows.filter((row) => {
       return Object.keys(row).some((field) => {
-        return searchRegex.test(row[field].toString());
-      });
-    });
-    setRows(filteredRows);
-    console.log("New",rows)
-  };
+        return searchRegex.test(row[field].toString())
+      })
+    })
+    setRows(filteredRows)
+  }
 
-  React.useEffect(() => {
-    setRows(characters); 
-  }, [characters]);
+
+  useEffect(() => {
+    setRows(characters)
+  }, [characters])
+
 
   return (
     <div style={{ height: 500, width: '70%', marginLeft:"15%", marginTop:"3%" }} className={classes.setup}>
@@ -206,5 +206,5 @@ export default function List() {
         }}
       />
     </div>
-  );
+  )
 }
