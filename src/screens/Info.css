@@ -1,0 +1,22 @@
+@import url('https://fonts.googleapis.com/css2?family=Audiowide&family=Black+Ops+One&family=Playfair+Display:wght@700&display=swap');
+
+h1{
+    font-family: 'Playfair Display', serif;
+    font-size: 50px;
+}
+
+h2{
+    font-family: 'Playfair Display', serif;
+    font-size: 30px;
+}
+.photo{
+    width: 65%;
+    border-radius: 5px;
+    text-align: center;
+}
+.quotes{
+    display: flex;
+    overflow-x: auto ;
+    padding: 20px;
+    color: rgb(241, 18, 18);
+}

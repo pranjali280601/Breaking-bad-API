@@ -1,0 +1,28 @@
+  .gradient{
+    width: 100%;
+    z-index: 1;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.4);
+    background-image: linear-gradient(
+        to top,
+        rgba(0,0,0,0.8) 0,
+        rgba(0,0,0,0) 60%,
+        rgba(0,0,0,0.8) 100%
+    );
+  }
+  .logo{
+    position: absolute;
+    width: 20%;
+    left: 40%;
+    top: 2%;
+    object-fit: contain;
+  }
+  .list{
+    position: absolute;
+    width: 50%;
+  
+    top: 5%;
+    object-fit: contain;
+
+  }
+  

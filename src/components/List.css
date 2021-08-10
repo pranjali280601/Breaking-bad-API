@@ -1,0 +1,12 @@
+.table{
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white !important;
+    width: 50%;
+    height: 50%;
+    top: 10%;
+    left: 5%;
+    padding: 20px;
+}
+.set{
+    color: white;
+}
